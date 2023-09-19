@@ -97,5 +97,19 @@ int frst_chr(char *input, int *i);
 void print_syntx_err(lists_shell *listssh, char *input, int i, int bool);
 int syntx_err(lists_shell *listssh, char *input);
 
+int is_cdir(char *path, int *i);
+char *_which(char *cmd, char **_environ);
+int is_extble(lists_shell *listssh);
+int err_cmd(char *dir, lists_shell *listssh);
+int cmd_exec(lists_shell *listssh);
+
+int cmp_env_name(const char *nenv, const char *name);
+char *_getenv(const char *name, char **_environ);
+int _env(lists_shell *listssh);
+
+char *copy_info(char *name, char *value);
+void set_env(char *name, char *value, lists_shell *listssh);
+int _setenv(lists_shell *listssh);
+int _unsetenv(lists_shell *listssh);
 
 #endif
