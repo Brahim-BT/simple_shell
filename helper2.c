@@ -1,0 +1,40 @@
+#include "main.h"
+
+/**
+ * aux_help - this function will help information for the builtin help for us.
+ * Return: void
+ */
+void aux_help(void)
+{
+	char *hlp = "help: help [-dms] [pattern ...]\n";
+
+	write(STDOUT_FILENO, hlp, _strlen(hlp));
+	hlp = "\tDisplay information about builtin commands.\n ";
+	write(STDOUT_FILENO, hlp, _strlen(hlp));
+	hlp = "Displays brief summaries of builtin commands.\n";
+	write(STDOUT_FILENO, hlp, _strlen(hlp));
+}
+/**
+ * aux_help_alias - this function will help information for the builtin alias for us.
+ * Return: void
+ */
+void aux_help_alias(void)
+{
+	char *hlp = "alias: alias [-p] [name[=value]...]\n";
+
+	write(STDOUT_FILENO, hlp, _strlen(hlp));
+	hlp = "\tDefine or display aliases.\n ";
+	write(STDOUT_FILENO, hlp, _strlen(hlp));
+}
+/**
+ * aux_help_cd - this function help information for the builtin alias for us.
+ * Return: void
+ */
+void aux_help_cd(void)
+{
+	char *hlp = "cd: cd [-L|[-P [-e]] [-@]] [dir]\n";
+
+	write(STDOUT_FILENO, hlp, _strlen(hlp));
+	hlp = "\tChange the shell working directory.\n ";
+	write(STDOUT_FILENO, hlp, _strlen(hlp));
+}

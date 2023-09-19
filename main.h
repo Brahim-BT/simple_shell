@@ -11,6 +11,12 @@
 #include <limits.h>
 #include <sys/stat.h>
 
+#define BUFFERSIZE 1024
+#define TOK_BUFFERSIZE 128
+#define TOK_DELIM " \t\r\n\a"
+
+extern char **environ;
+
 /**
  * struct lists - struct lists
  * @av: String pointer
@@ -111,5 +117,33 @@ char *copy_info(char *name, char *value);
 void set_env(char *name, char *value, lists_shell *listssh);
 int _setenv(lists_shell *listssh);
 int _unsetenv(lists_shell *listssh);
+
+int get_error(lists_shell *listssh, int eval);
+
+char *strcat_cd(lists_shell *listssh, char *msg, char *error, char *ver_str);
+char *error_get_cd(lists_shell *listssh);
+char *error_not_found(lists_shell *listssh);
+char *error_exit_shell(lists_shell *listssh);
+
+char *error_env(lists_shell *listssh);
+char *error_path_126(lists_shell *listssh);
+
+int exec_line(lists_shell *listssh);
+
+int exit_shell(lists_shell *listssh);
+
+void bring_line(char **lineptr, size_t *n, char *buffer, size_t j);
+ssize_t get_line(char **lineptr, size_t *n, FILE *stream);
+void get_sigint(int sig);
+
+void aux_help_env(void);
+void aux_help_setenv(void);
+void aux_help_unsetenv(void);
+void aux_help_general(void);
+void aux_help_exit(void);
+
+void aux_help(void);
+void aux_help_alias(void);
+void aux_help_cd(void);
 
 #endif
