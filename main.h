@@ -84,10 +84,18 @@ typedef struct builtins_s
 } builtin_t;
 
 int (*get_combltin(char *cmd))(lists_shell *listssh);
+
 int cd_command(lists_shell *listssh);
 void cd_d(lists_shell *listssh);
 void cd_t(lists_shell *listssh);
 void cd_pre(lists_shell *listssh);
 void cd_hm(lists_shell *listssh);
+
+int rptd_chr(char *input, int i);
+int err_sp_op(char *input, int i, char last);
+int frst_chr(char *input, int *i);
+void print_syntx_err(lists_shell *listssh, char *input, int i, int bool);
+int syntx_err(lists_shell *listssh, char *input);
+
 
 #endif
