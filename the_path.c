@@ -24,22 +24,22 @@ int is_cmd(info_t *f, char *path)
 
 /**
  * dup_chars - duplicates characters
- * @pathstr: the PATH string
- * @start: starting index
- * @stop: stopping index
+ * @path_string: the PATH string
+ * @strt: starting index
+ * @stp: stopping index
  *
  * Return: pointer to new buffer
  */
-char *dup_chars(char *pathstr, int start, int stop)
+char *dup_chars(char *path_string, int strt, int stp)
 {
-	static char buf[1024];
-	int i = 0, k = 0;
+	static char bfr[1024];
+	int m = 0, o = 0;
 
-	for (k = 0, i = start; i < stop; i++)
-		if (pathstr[i] != ':')
-			buf[k++] = pathstr[i];
-	buf[k] = 0;
-	return (buf);
+	for (o = 0, m = strt; m < stp; m++)
+		if (path_string[m] != ':')
+			bfr[o++] = path_string[m];
+	bfr[o] = 0;
+	return (bfr);
 }
 
 /**
