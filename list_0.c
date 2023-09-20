@@ -89,6 +89,7 @@ line_list *add_line_node_end(line_list **head, char *line)
  * @head: head of the linked list.
  * Return: no return.
  */
+
 void free_line_list(line_list **head)
 {
 	line_list *temp;
