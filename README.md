@@ -1,1 +1,1 @@
-This is the repository of simple_shell project
+simple_shell
