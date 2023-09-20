@@ -30,6 +30,7 @@ char *without_comment(char *in)
 	}
 	return (in);
 }
+
 /**
  * shell_loop - Loop of shell
  * @listssh: lists relevant (av, input, args)
