@@ -1,4 +1,4 @@
-#include "main.h"
+#include "holberton.h"
 
 /**
  * _strcat - concatenate two strings
@@ -8,21 +8,21 @@
  */
 char *_strcat(char *dest, const char *src)
 {
-	int a;
-	int b;
-	for (a = 0; dest[a] != '\0'; a++)
+	int i;
+	int j;
+
+	for (i = 0; dest[i] != '\0'; i++)
 		;
 
-	for (b = 0; src[b] != '\0'; b++)
+	for (j = 0; src[j] != '\0'; j++)
 	{
-		dest[a] = src[b];
-		a++;
+		dest[i] = src[j];
+		i++;
 	}
-	dest[a] = '\0';
+
+	dest[i] = '\0';
 	return (dest);
 }
-
-
 /**
  * *_strcpy - Copies the string pointed to by src.
  * @dest: Type char pointer the dest of the copied str
@@ -61,7 +61,6 @@ int _strcmp(char *s1, char *s2)
 		return (-1);
 	return (0);
 }
-
 /**
  * _strchr - locates a character in a string,
  * @s: string.
@@ -79,7 +78,6 @@ char *_strchr(char *s, char c)
 		return (s + i);
 	return ('\0');
 }
-
 /**
  * _strspn - gets the length of a prefix substring.
  * @s: initial segment.
@@ -106,4 +104,3 @@ int _strspn(char *s, char *accept)
 	}
 	return (i);
 }
-

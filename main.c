@@ -1,84 +1,73 @@
-#include "main.h"
+#include "holberton.h"
 
 /**
- * _memcpy - copies information between void pointers.
- * @newpntr: destination pointer.
- * @pntr: source pointer.
- * @size: size of the new pointer.
+ * free_data - frees data structure
  *
- * Return: no return.
+ * @datash: data structure
+ * Return: no return
  */
-void _memcpy(void *newpntr, const void *pntr, unsigned int size)
+void free_data(data_shell *datash)
 {
-	char *char_pntr = (char *)pntr;
-	char *char_newpntr = (char *)newpntr;
 	unsigned int i;
-	for (i = 0; i < size; i++)
-		char_newpntr[i] = char_pntr[i];
-}
 
-
-/**
- * _realloc - reallocates a memory block.
- * @pntr: pointer to the memory previously allocated.
- * @old_size: size, in bytes, of the allocated space of ptr.
- * @new_size: new size, in bytes, of the new memory block.
- *
- * Return: ptr.
- * if new_size == old_size, returns ptr without changes.
- * if malloc fails, returns NULL.
- */
-void *_realloc(void *pntr, unsigned int old_size, unsigned int new_size)
-{
-	void *newpntr;
-	if (pntr == NULL)
-		return (malloc(new_size));
-	if (new_size == 0)
+	for (i = 0; datash->_environ[i]; i++)
 	{
-		free(pntr);
-		return (NULL);
+		free(datash->_environ[i]);
 	}
-	if (new_size == old_size)
-		return (pntr);
-	newpntr = malloc(new_size);
-	if (newpntr == NULL)
-		return (NULL);
-	if (new_size < old_size)
-		_memcpy(newpntr, pntr, new_size);
-	else
-		_memcpy(newpntr, pntr, old_size);
-	free(pntr);
-	return (newpntr);
+
+	free(datash->_environ);
+	free(datash->pid);
 }
 
 /**
- * _reallocdp - reallocates a memory block of a double pointer.
- * @pntr: double pointer to the memory previously allocated.
- * @old_size: size, in bytes, of the allocated space of ptr.
- * @new_size: new size, in bytes, of the new memory block.
+ * set_data - Initialize data structure
  *
- * Return: ptr.
- * if new_size == old_size, returns ptr without changes.
- * if malloc fails, returns NULL.
+ * @datash: data structure
+ * @av: argument vector
+ * Return: no return
  */
-char **_reallocdp(char **pntr, unsigned int old_size, unsigned int new_size)
+void set_data(data_shell *datash, char **av)
 {
-	char **newpntr;
 	unsigned int i;
 
-	if (pntr == NULL)
-		return (malloc(sizeof(char *) * new_size));
+	datash->av = av;
+	datash->input = NULL;
+	datash->args = NULL;
+	datash->status = 0;
+	datash->counter = 1;
 
-	if (new_size == old_size)
-		return (pntr);
+	for (i = 0; environ[i]; i++)
+		;
 
-	newpntr = malloc(sizeof(char *) * new_size);
-	if (newpntr == NULL)
-		return (NULL);
-	for (i = 0; i < old_size; i++)
-		newpntr[i] = pntr[i];
-	free(pntr);
+	datash->_environ = malloc(sizeof(char *) * (i + 1));
 
-	return (newpntr);
+	for (i = 0; environ[i]; i++)
+	{
+		datash->_environ[i] = _strdup(environ[i]);
+	}
+
+	datash->_environ[i] = NULL;
+	datash->pid = aux_itoa(getpid());
 }
 
+/**
+ * main - Entry point
+ *
+ * @ac: argument count
+ * @av: argument vector
+ *
+ * Return: 0 on success.
+ */
+int main(int ac, char **av)
+{
+	data_shell datash;
+	(void) ac;
+
+	signal(SIGINT, get_sigint);
+	set_data(&datash, av);
+	shell_loop(&datash);
+	free_data(&datash);
+	if (datash.status < 0)
+		return (255);
+	return (datash.status);
+}

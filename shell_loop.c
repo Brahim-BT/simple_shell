@@ -1,4 +1,4 @@
-#include "main.h"
+#include "holberton.h"
 
 /**
  * without_comment - deletes comments from the input
@@ -8,39 +8,44 @@
  */
 char *without_comment(char *in)
 {
-	int a, up_to;
+	int i, up_to;
+
 	up_to = 0;
-	for (a = 0; in[a]; a++)
+	for (i = 0; in[i]; i++)
 	{
-		if (in[a] == '#')
+		if (in[i] == '#')
 		{
-			if (a == 0)
+			if (i == 0)
 			{
 				free(in);
 				return (NULL);
 			}
-			if (in[a - 1] == ' ' || in[a - 1] == '\t' || in[a - 1] == ';')
-				up_to = a;
+
+			if (in[i - 1] == ' ' || in[i - 1] == '\t' || in[i - 1] == ';')
+				up_to = i;
 		}
 	}
+
 	if (up_to != 0)
 	{
-		in = _realloc(in, a, up_to + 1);
+		in = _realloc(in, i, up_to + 1);
 		in[up_to] = '\0';
 	}
+
 	return (in);
 }
 
 /**
  * shell_loop - Loop of shell
- * @listssh: lists relevant (av, input, args)
+ * @datash: data relevant (av, input, args)
  *
  * Return: no return.
  */
-void shell_loop(lists_shell *listssh)
+void shell_loop(data_shell *datash)
 {
 	int loop, i_eof;
 	char *input;
+
 	loop = 1;
 	while (loop == 1)
 	{
@@ -52,15 +57,15 @@ void shell_loop(lists_shell *listssh)
 			if (input == NULL)
 				continue;
 
-			if (check_syntax_error(listssh, input) == 1)
+			if (check_syntax_error(datash, input) == 1)
 			{
-				listssh->status = 2;
+				datash->status = 2;
 				free(input);
 				continue;
 			}
-			input = rep_var(input, listssh);
-			loop = split_commands(listssh, input);
-			listssh->counter += 1;
+			input = rep_var(input, datash);
+			loop = split_commands(datash, input);
+			datash->counter += 1;
 			free(input);
 		}
 		else
@@ -70,4 +75,3 @@ void shell_loop(lists_shell *listssh)
 		}
 	}
 }
-

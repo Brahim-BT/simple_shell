@@ -1,19 +1,19 @@
-#include "main.h"
+#include "holberton.h"
 
 /**
  * check_env - checks if the typed variable is an env variable
  *
- * @head: head of linked list
+ * @h: head of linked list
  * @in: input string
- * @lists: lists structure
+ * @data: data structure
  * Return: no return
  */
-void check_env(r_var **head, char *in, lists_shell *lists)
+void check_env(r_var **h, char *in, data_shell *data)
 {
 	int row, chr, j, lval;
 	char **_envr;
 
-	_envr = lists->_environ;
+	_envr = data->_environ;
 	for (row = 0; _envr[row]; row++)
 	{
 		for (j = 1, chr = 0; _envr[row][chr]; chr++)
@@ -21,7 +21,7 @@ void check_env(r_var **head, char *in, lists_shell *lists)
 			if (_envr[row][chr] == '=')
 			{
 				lval = _strlen(_envr[row] + chr + 1);
-				add_rvar_node(head, j, _envr[row] + chr + 1, lval);
+				add_rvar_node(h, j, _envr[row] + chr + 1, lval);
 				return;
 			}
 
@@ -38,45 +38,45 @@ void check_env(r_var **head, char *in, lists_shell *lists)
 			break;
 	}
 
-	add_rvar_node(head, j, NULL, 0);
+	add_rvar_node(h, j, NULL, 0);
 }
 
 /**
  * check_vars - check if the typed variable is $$ or $?
  *
- * @head: head of the linked list
+ * @h: head of the linked list
  * @in: input string
  * @st: last status of the Shell
- * @lists: lists structure
+ * @data: data structure
  * Return: no return
  */
-int check_vars(r_var **head, char *in, char *st, lists_shell *lists)
+int check_vars(r_var **h, char *in, char *st, data_shell *data)
 {
 	int i, lst, lpd;
 
 	lst = _strlen(st);
-	lpd = _strlen(lists->pid);
+	lpd = _strlen(data->pid);
 
 	for (i = 0; in[i]; i++)
 	{
 		if (in[i] == '$')
 		{
 			if (in[i + 1] == '?')
-				add_rvar_node(head, 2, st, lst), i++;
+				add_rvar_node(h, 2, st, lst), i++;
 			else if (in[i + 1] == '$')
-				add_rvar_node(head, 2, lists->pid, lpd), i++;
+				add_rvar_node(h, 2, data->pid, lpd), i++;
 			else if (in[i + 1] == '\n')
-				add_rvar_node(head, 0, NULL, 0);
+				add_rvar_node(h, 0, NULL, 0);
 			else if (in[i + 1] == '\0')
-				add_rvar_node(head, 0, NULL, 0);
+				add_rvar_node(h, 0, NULL, 0);
 			else if (in[i + 1] == ' ')
-				add_rvar_node(head, 0, NULL, 0);
+				add_rvar_node(h, 0, NULL, 0);
 			else if (in[i + 1] == '\t')
-				add_rvar_node(head, 0, NULL, 0);
+				add_rvar_node(h, 0, NULL, 0);
 			else if (in[i + 1] == ';')
-				add_rvar_node(head, 0, NULL, 0);
+				add_rvar_node(h, 0, NULL, 0);
 			else
-				check_env(head, in + i, lists);
+				check_env(h, in + i, data);
 		}
 	}
 
@@ -131,25 +131,27 @@ char *replaced_input(r_var **head, char *input, char *new_input, int nlen)
 			j++;
 		}
 	}
+
 	return (new_input);
 }
+
 /**
  * rep_var - calls functions to replace string into vars
  *
  * @input: input string
- * @listssh: lists structure
+ * @datash: data structure
  * Return: replaced string
  */
-char *rep_var(char *input, lists_shell *listssh)
+char *rep_var(char *input, data_shell *datash)
 {
 	r_var *head, *indx;
 	char *status, *new_input;
 	int olen, nlen;
 
-	status = aux_itoa(listssh->status);
+	status = aux_itoa(datash->status);
 	head = NULL;
 
-	olen = check_vars(&head, input, status, listssh);
+	olen = check_vars(&head, input, status, datash);
 
 	if (head == NULL)
 	{
@@ -179,4 +181,3 @@ char *rep_var(char *input, lists_shell *listssh)
 
 	return (new_input);
 }
-

@@ -1,21 +1,24 @@
-#include "main.h"
+#include "holberton.h"
 
 /**
  * add_sep_node_end - adds a separator found at the end
  * of a sep_list.
  * @head: head of the linked list.
- * @sept: separator found (; | &).
+ * @sep: separator found (; | &).
  * Return: address of the head.
  */
-sep_list *add_sep_node_end(sep_list **head, char sept)
+sep_list *add_sep_node_end(sep_list **head, char sep)
 {
 	sep_list *new, *temp;
+
 	new = malloc(sizeof(sep_list));
 	if (new == NULL)
 		return (NULL);
-	new->separator = sept;
+
+	new->separator = sep;
 	new->next = NULL;
 	temp = *head;
+
 	if (temp == NULL)
 	{
 		*head = new;
@@ -81,6 +84,7 @@ line_list *add_line_node_end(line_list **head, char *line)
 			temp = temp->next;
 		temp->next = new;
 	}
+
 	return (*head);
 }
 
@@ -89,11 +93,11 @@ line_list *add_line_node_end(line_list **head, char *line)
  * @head: head of the linked list.
  * Return: no return.
  */
-
 void free_line_list(line_list **head)
 {
 	line_list *temp;
 	line_list *curr;
+
 	if (head != NULL)
 	{
 		curr = *head;
@@ -102,8 +106,6 @@ void free_line_list(line_list **head)
 			curr = curr->next;
 			free(temp);
 		}
-
 		*head = NULL;
 	}
 }
-

@@ -1,4 +1,4 @@
-#include "main.h"
+#include "holberton.h"
 
 /**
  * _strdup - duplicates a str in the heap memory.
@@ -9,6 +9,7 @@ char *_strdup(const char *s)
 {
 	char *new;
 	size_t len;
+
 	len = _strlen(s);
 	new = malloc(sizeof(char) * (len + 1));
 	if (new == NULL)
@@ -17,7 +18,6 @@ char *_strdup(const char *s)
 	return (new);
 }
 
-
 /**
  * _strlen - Returns the lenght of a string.
  * @s: Type char pointer
@@ -25,11 +25,12 @@ char *_strdup(const char *s)
  */
 int _strlen(const char *s)
 {
-	int lent;
-	for (lent = 0; s[lent] != 0; lent++)
+	int len;
+
+	for (len = 0; s[len] != 0; len++)
 	{
 	}
-	return (lent);
+	return (len);
 }
 
 /**
@@ -41,8 +42,8 @@ int _strlen(const char *s)
  */
 int cmp_chars(char str[], const char *delim)
 {
-
 	unsigned int i, j, k;
+
 	for (i = 0, k = 0; str[i]; i++)
 	{
 		for (j = 0; delim[j]; j++)
@@ -117,12 +118,12 @@ char *_strtok(char str[], const char *delim)
  */
 int _isdigit(const char *s)
 {
-	unsigned int j;
-	for (j = 0; s[j]; j++)
+	unsigned int i;
+
+	for (i = 0; s[i]; i++)
 	{
-		if (s[j] < 48 || s[j] > 57)
+		if (s[i] < 48 || s[i] > 57)
 			return (0);
 	}
 	return (1);
 }
-

@@ -1,39 +1,41 @@
-#include "main.h"
+#include "holberton.h"
 
 /**
  * get_len - Get the lenght of a number.
- * @nm: type int number.
+ * @n: type int number.
  * Return: Lenght of a number.
  */
-int get_len(int nm)
+int get_len(int n)
 {
-	unsigned int nm1;
+	unsigned int n1;
 	int lenght = 1;
-	if (nm < 0)
+
+	if (n < 0)
 	{
 		lenght++;
-		nm1 = nm * -1;
+		n1 = n * -1;
 	}
 	else
 	{
-		nm1 = nm;
+		n1 = n;
 	}
-	while (nm1 > 9)
+	while (n1 > 9)
 	{
 		lenght++;
-		nm1 = nm1 / 10;
+		n1 = n1 / 10;
 	}
+
 	return (lenght);
 }
 /**
  * aux_itoa - function converts int to string.
- * @nm: type int number
+ * @n: type int number
  * Return: String.
  */
-char *aux_itoa(int nm)
+char *aux_itoa(int n)
 {
-	unsigned int nm1;
-	int lenght = get_len(nm);
+	unsigned int n1;
+	int lenght = get_len(n);
 	char *buffer;
 
 	buffer = malloc(sizeof(char) * (lenght + 1));
@@ -42,23 +44,23 @@ char *aux_itoa(int nm)
 
 	*(buffer + lenght) = '\0';
 
-	if (nm < 0)
+	if (n < 0)
 	{
-		nm1 = nm * -1;
+		n1 = n * -1;
 		buffer[0] = '-';
 	}
 	else
 	{
-		nm1 = nm;
+		n1 = n;
 	}
 
 	lenght--;
 	do {
-		*(buffer + lenght) = (nm1 % 10) + '0';
-		nm1 = nm1 / 10;
+		*(buffer + lenght) = (n1 % 10) + '0';
+		n1 = n1 / 10;
 		lenght--;
 	}
-	while (nm1 > 0)
+	while (n1 > 0)
 		;
 	return (buffer);
 }
@@ -71,6 +73,7 @@ char *aux_itoa(int nm)
 int _atoi(char *s)
 {
 	unsigned int count = 0, size = 0, oi = 0, pn = 1, m = 1, i;
+
 	while (*(s + count) != '\0')
 	{
 		if (size > 0 && (*(s + count) < '0' || *(s + count) > '9'))
@@ -87,6 +90,7 @@ int _atoi(char *s)
 		}
 		count++;
 	}
+
 	for (i = count - size; i < count; i++)
 	{
 		oi = oi + ((*(s + i) - 48) * m);
@@ -94,4 +98,3 @@ int _atoi(char *s)
 	}
 	return (oi * pn);
 }
-

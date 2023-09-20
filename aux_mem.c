@@ -1,26 +1,26 @@
-#include "main.h"
+#include "holberton.h"
 
 /**
  * _memcpy - copies information between void pointers.
- * @newpntr: destination pointer.
- * @pntr: source pointer.
+ * @newptr: destination pointer.
+ * @ptr: source pointer.
  * @size: size of the new pointer.
  *
  * Return: no return.
  */
-void _memcpy(void *newpntr, const void *pntr, unsigned int size)
+void _memcpy(void *newptr, const void *ptr, unsigned int size)
 {
-	char *char_pntr = (char *)pntr;
-	char *char_newpntr = (char *)newpntr;
+	char *char_ptr = (char *)ptr;
+	char *char_newptr = (char *)newptr;
 	unsigned int i;
-	for (i = 0; i < size; i++)
-		char_newpntr[i] = char_pntr[i];
-}
 
+	for (i = 0; i < size; i++)
+		char_newptr[i] = char_ptr[i];
+}
 
 /**
  * _realloc - reallocates a memory block.
- * @pntr: pointer to the memory previously allocated.
+ * @ptr: pointer to the memory previously allocated.
  * @old_size: size, in bytes, of the allocated space of ptr.
  * @new_size: new size, in bytes, of the new memory block.
  *
@@ -28,32 +28,38 @@ void _memcpy(void *newpntr, const void *pntr, unsigned int size)
  * if new_size == old_size, returns ptr without changes.
  * if malloc fails, returns NULL.
  */
-void *_realloc(void *pntr, unsigned int old_size, unsigned int new_size)
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
-	void *newpntr;
-	if (pntr == NULL)
+	void *newptr;
+
+	if (ptr == NULL)
 		return (malloc(new_size));
+
 	if (new_size == 0)
 	{
-		free(pntr);
+		free(ptr);
 		return (NULL);
 	}
+
 	if (new_size == old_size)
-		return (pntr);
-	newpntr = malloc(new_size);
-	if (newpntr == NULL)
+		return (ptr);
+
+	newptr = malloc(new_size);
+	if (newptr == NULL)
 		return (NULL);
+
 	if (new_size < old_size)
-		_memcpy(newpntr, pntr, new_size);
+		_memcpy(newptr, ptr, new_size);
 	else
-		_memcpy(newpntr, pntr, old_size);
-	free(pntr);
-	return (newpntr);
+		_memcpy(newptr, ptr, old_size);
+
+	free(ptr);
+	return (newptr);
 }
 
 /**
  * _reallocdp - reallocates a memory block of a double pointer.
- * @pntr: double pointer to the memory previously allocated.
+ * @ptr: double pointer to the memory previously allocated.
  * @old_size: size, in bytes, of the allocated space of ptr.
  * @new_size: new size, in bytes, of the new memory block.
  *
@@ -61,25 +67,25 @@ void *_realloc(void *pntr, unsigned int old_size, unsigned int new_size)
  * if new_size == old_size, returns ptr without changes.
  * if malloc fails, returns NULL.
  */
-
-char **_reallocdp(char **pntr, unsigned int old_size, unsigned int new_size)
+char **_reallocdp(char **ptr, unsigned int old_size, unsigned int new_size)
 {
-	char **newpntr;
+	char **newptr;
 	unsigned int i;
 
-	if (pntr == NULL)
+	if (ptr == NULL)
 		return (malloc(sizeof(char *) * new_size));
 
 	if (new_size == old_size)
-		return (pntr);
+		return (ptr);
 
-	newpntr = malloc(sizeof(char *) * new_size);
-	if (newpntr == NULL)
+	newptr = malloc(sizeof(char *) * new_size);
+	if (newptr == NULL)
 		return (NULL);
+
 	for (i = 0; i < old_size; i++)
-		newpntr[i] = pntr[i];
-	free(pntr);
+		newptr[i] = ptr[i];
 
-	return (newpntr);
+	free(ptr);
+
+	return (newptr);
 }
-
