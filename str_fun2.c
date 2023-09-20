@@ -2,24 +2,24 @@
 
 /**
  * _strcpy - copies a string
- * @dest: the destination
+ * @dst: the destination
  * @src: the source
  *
  * Return: pointer to destination
  */
-char *_strcpy(char *dest, char *src)
+char *_strcpy(char *dst, char *src)
 {
 	int i = 0;
 
-	if (dest == src || src == 0)
-		return (dest);
+	if (dst == src || src == 0)
+		return (dst);
 	while (src[i])
 	{
-		dest[i] = src[i];
+		dst[i] = src[i];
 		i++;
 	}
-	dest[i] = 0;
-	return (dest);
+	dst[i] = 0;
+	return (dst);
 }
 
 /**
