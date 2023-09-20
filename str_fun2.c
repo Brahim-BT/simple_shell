@@ -1,6 +1,5 @@
 #include "shell.h"
 
-
 /**
  * _strcpy - copies a string
  * @dest: the destination
@@ -22,9 +21,6 @@ char *_strcpy(char *dest, char *src)
 	dest[i] = 0;
 	return (dest);
 }
-
-
-
 
 /**
  * _strdup - duplicates a string
@@ -48,11 +44,6 @@ char *_strdup(const char *str)
 		ret[length] = *--str;
 	return (ret);
 }
-
-
-
-
-
 
 /**
  *_puts - prints an input string
@@ -80,13 +71,6 @@ void _puts(char *str)
  * Return: On success 1.
  * On error, -1 is returned, and errno is set appropriately.
  */
- 
- 
- 
- 
- 
- 
- 
 int _putchar(char c)
 {
 	static int i;
