@@ -17,7 +17,6 @@
 
 extern char **environ;
 
-
 /**
  * struct lists - struct lists
  * @av: String pointer
@@ -30,13 +29,13 @@ extern char **environ;
  */
 typedef struct lists
 {
-	char **av;
-	char *input;
-	char **args;
-	int status;
-	int counter;
-	char **_environ;
-	char *pid;
+    char **av;
+    char *input;
+    char **args;
+    int status;
+    int counter;
+    char **_environ;
+    char *pid;
 } lists_shell;
 
 /**
@@ -47,8 +46,8 @@ typedef struct lists
  */
 typedef struct sep_list_s
 {
-	char separator;
-	struct sep_list_s *next;
+    char separator;
+    struct sep_list_s *next;
 } sep_list;
 
 /**
@@ -59,8 +58,8 @@ typedef struct sep_list_s
  */
 typedef struct list_s
 {
-	char *line;
-	struct list_s *next;
+    char *line;
+    struct list_s *next;
 } line_list;
 
 /**
@@ -73,10 +72,10 @@ typedef struct list_s
  */
 typedef struct var_list
 {
-	int len_var;
-	char *val;
-	int len_val;
-	struct var_list *next;
+    int len_var;
+    char *val;
+    int len_val;
+    struct var_list *next;
 } r_var;
 
 /**
@@ -86,8 +85,8 @@ typedef struct var_list
  */
 typedef struct builtins_s
 {
-	char *name;
-	int (*f)(lists_shell *listssh);
+    char *name;
+    int (*f)(lists_shell *listssh);
 } builtin_t;
 
 sep_list *add_sep_node_end(sep_list **head, char sep);
