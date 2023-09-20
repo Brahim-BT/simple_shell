@@ -43,7 +43,6 @@ r_var *add_rvar_node(r_var **head, int lnvar, char *val, int lnval)
  * @head: head of the linked list.
  * Return: no return.
  */
-
 void free_rvar_list(r_var **head)
 {
 	r_var *temp;
