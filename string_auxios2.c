@@ -2,20 +2,20 @@
 
 /**
  * _strdup - duplicates a str in the heap memory.
- * @s: Type char pointer str
+ * @my_str: Type char pointer str
  * Return: duplicated str
  */
-char *_strdup(const char *s)
+char *_strdup(const char *my_str)
 {
-	char *new;
-	size_t len;
+	char *my_new;
+	size_t my_l;
 
-	len = _strlen(s);
-	new = malloc(sizeof(char) * (len + 1));
-	if (new == NULL)
+	my_l = _strlen(my_str);
+	my_new = malloc(sizeof(char) * (my_l + 1));
+	if (my_new == NULL)
 		return (NULL);
-	_memcpy(new, s, len + 1);
-	return (new);
+	_memcpy(my_new, my_str, my_l + 1);
+	return (my_new);
 }
 
 /**
@@ -42,20 +42,20 @@ int _strlen(const char *s)
  */
 int cmp_chars(char str[], const char *delim)
 {
-	unsigned int i, j, k;
+	unsigned int m, n, o;
 
-	for (i = 0, k = 0; str[i]; i++)
+	for (m = 0, o = 0; str[m]; m++)
 	{
-		for (j = 0; delim[j]; j++)
+		for (n = 0; delim[n]; n++)
 		{
-			if (str[i] == delim[j])
+			if (str[m] == delim[n])
 			{
-				k++;
+				o++;
 				break;
 			}
 		}
 	}
-	if (i == k)
+	if (m == o)
 		return (1);
 	return (0);
 }
@@ -69,45 +69,46 @@ int cmp_chars(char str[], const char *delim)
  */
 char *_strtok(char str[], const char *delim)
 {
-	static char *splitted, *str_end;
-	char *str_start;
+	static char *my_spliter, *end_string;
+	
+	char *strat_string;
+	
 	unsigned int i, bool;
 
 	if (str != NULL)
 	{
 		if (cmp_chars(str, delim))
 			return (NULL);
-		splitted = str; /*Store first address*/
+		my_spliter = str; /*Store first address*/
 		i = _strlen(str);
-		str_end = &str[i]; /*Store last address*/
+		end_string = &str[i]; /*Store last address*/
 	}
-	str_start = splitted;
-	if (str_start == str_end) /*Reaching the end*/
+	strat_string = my_spliter;
+	if (strat_string == end_string) /*Reaching the end*/
 		return (NULL);
-
-	for (bool = 0; *splitted; splitted++)
+	for (bool = 0; *my_spliter; my_spliter++)
 	{
 		/*Breaking loop finding the next token*/
-		if (splitted != str_start)
-			if (*splitted && *(splitted - 1) == '\0')
+		if (my_spliter != strat_string)
+			if (*my_spliter && *(my_spliter - 1) == '\0')
 				break;
 		/*Replacing delimiter for null char*/
 		for (i = 0; delim[i]; i++)
 		{
-			if (*splitted == delim[i])
+			if (*my_spliter == delim[i])
 			{
-				*splitted = '\0';
-				if (splitted == str_start)
-					str_start++;
+				*my_spliter = '\0';
+				if (my_spliter == strat_string)
+					strat_string++;
 				break;
 			}
 		}
-		if (bool == 0 && *splitted) /*Str != Delim*/
+		if (bool == 0 && *my_spliter) /*Str != Delim*/
 			bool = 1;
 	}
 	if (bool == 0) /*Str == Delim*/
 		return (NULL);
-	return (str_start);
+	return (strat_string);
 }
 
 /**

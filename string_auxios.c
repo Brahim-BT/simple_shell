@@ -2,62 +2,58 @@
 
 /**
  * _strcat - concatenate two strings
- * @dest: char pointer the dest of the copied str
+ * @destination: char pointer the dest of the copied str
  * @src: const char pointer the source of str
  * Return: the dest
  */
-char *_strcat(char *dest, const char *src)
+char *_strcat(char *destination, const char *src)
 {
-	int i;
-	int j;
+	int m;
 
-	for (i = 0; dest[i] != '\0'; i++)
+	int n;
+
+	for (m = 0; destination[m] != '\0'; m++)
 		;
-
-	for (j = 0; src[j] != '\0'; j++)
+	for (n = 0; src[n] != '\0'; n++)
 	{
-		dest[i] = src[j];
-		i++;
+		destination[m] = src[n];
+		m++;
 	}
-
-	dest[i] = '\0';
-	return (dest);
+	destination[m] = '\0';
+	return (destination);
 }
 /**
  * *_strcpy - Copies the string pointed to by src.
- * @dest: Type char pointer the dest of the copied str
+ * @destination: Type char pointer the dest of the copied str
  * @src: Type char pointer the source of str
  * Return: the dest.
  */
-char *_strcpy(char *dest, char *src)
+char *_strcpy(char *destination, char *src)
 {
-
 	size_t a;
 
 	for (a = 0; src[a] != '\0'; a++)
 	{
-		dest[a] = src[a];
+		destination[a] = src[a];
 	}
-	dest[a] = '\0';
-
-	return (dest);
+	destination[a] = '\0';
+	return (destination);
 }
 /**
  * _strcmp - Function that compares two strings.
- * @s1: type str compared
- * @s2: type str compared
+ * @string1: type str compared
+ * @string2: type str compared
  * Return: Always 0.
  */
-int _strcmp(char *s1, char *s2)
+int _strcmp(char *string1, char *string2)
 {
-	int i;
+	int m;
 
-	for (i = 0; s1[i] == s2[i] && s1[i]; i++)
+	for (m = 0; string1[m] == string2[m] && string1[m]; m++)
 		;
-
-	if (s1[i] > s2[i])
+	if (string1[m] > string2[m])
 		return (1);
-	if (s1[i] < s2[i])
+	if (string1[m] < string2[m])
 		return (-1);
 	return (0);
 }
@@ -86,14 +82,14 @@ char *_strchr(char *s, char c)
  */
 int _strspn(char *s, char *accept)
 {
-	int i, j, bool;
+	int m, n, bool;
 
-	for (i = 0; *(s + i) != '\0'; i++)
+	for (m = 0; *(s + m) != '\0'; m++)
 	{
 		bool = 1;
-		for (j = 0; *(accept + j) != '\0'; j++)
+		for (n = 0; *(accept + n) != '\0'; n++)
 		{
-			if (*(s + i) == *(accept + j))
+			if (*(s + m) == *(accept + n))
 			{
 				bool = 0;
 				break;
@@ -102,5 +98,5 @@ int _strspn(char *s, char *accept)
 		if (bool == 1)
 			break;
 	}
-	return (i);
+	return (m);
 }
