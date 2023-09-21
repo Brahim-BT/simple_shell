@@ -3,11 +3,11 @@
 /**
  * add_sep_node_end - adds a separator found at the end
  * of a sep_list.
- * @head: head of the linked list.
- * @sep: separator found (; | &).
+ * @hd: head of the linked list.
+ * @my_sepr: separator found (; | &).
  * Return: address of the head.
  */
-sep_list *add_sep_node_end(sep_list **head, char sep)
+sep_list *add_sep_node_end(sep_list **hd, char my_sepr)
 {
 	sep_list *new, *temp;
 
@@ -15,13 +15,13 @@ sep_list *add_sep_node_end(sep_list **head, char sep)
 	if (new == NULL)
 		return (NULL);
 
-	new->separator = sep;
+	new->separator = my_sepr;
 	new->next = NULL;
-	temp = *head;
+	temp = *hd;
 
 	if (temp == NULL)
 	{
-		*head = new;
+		*hd = new;
 	}
 	else
 	{
@@ -30,39 +30,39 @@ sep_list *add_sep_node_end(sep_list **head, char sep)
 		temp->next = new;
 	}
 
-	return (*head);
+	return (*hd);
 }
 
 /**
  * free_sep_list - frees a sep_list
- * @head: head of the linked list.
+ * @hd: head of the linked list.
  * Return: no return.
  */
-void free_sep_list(sep_list **head)
+void free_sep_list(sep_list **hd)
 {
 	sep_list *temp;
 	sep_list *curr;
 
-	if (head != NULL)
+	if (hd != NULL)
 	{
-		curr = *head;
+		curr = *hd;
 		while ((temp = curr) != NULL)
 		{
 			curr = curr->next;
 			free(temp);
 		}
-		*head = NULL;
+		*hd = NULL;
 	}
 }
 
 /**
  * add_line_node_end - adds a command line at the end
  * of a line_list.
- * @head: head of the linked list.
+ * @hd: head of the linked list.
  * @line: command line.
  * Return: address of the head.
  */
-line_list *add_line_node_end(line_list **head, char *line)
+line_list *add_line_node_end(line_list **hd, char *line)
 {
 	line_list *new, *temp;
 
@@ -72,11 +72,11 @@ line_list *add_line_node_end(line_list **head, char *line)
 
 	new->line = line;
 	new->next = NULL;
-	temp = *head;
+	temp = *hd;
 
 	if (temp == NULL)
 	{
-		*head = new;
+		*hd = new;
 	}
 	else
 	{
@@ -85,27 +85,27 @@ line_list *add_line_node_end(line_list **head, char *line)
 		temp->next = new;
 	}
 
-	return (*head);
+	return (*hd);
 }
 
 /**
  * free_line_list - frees a line_list
- * @head: head of the linked list.
+ * @hd: head of the linked list.
  * Return: no return.
  */
-void free_line_list(line_list **head)
+void free_line_list(line_list **hd)
 {
 	line_list *temp;
 	line_list *curr;
 
-	if (head != NULL)
+	if (hd != NULL)
 	{
-		curr = *head;
+		curr = *hd;
 		while ((temp = curr) != NULL)
 		{
 			curr = curr->next;
 			free(temp);
 		}
-		*head = NULL;
+		*hd = NULL;
 	}
 }
