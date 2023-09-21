@@ -1,4 +1,4 @@
-#include "main.h"
+#include "holberton.h"
 
 /**
  * is_cdir - checks ":" if is in the current directory.
@@ -6,19 +6,16 @@
  * @i: type int pointer of index.
  * Return: 1 if the path is searchable in the cd, 0 otherwise.
  */
-int is_cdir(char *path, int *i)
+int is_cdir(char *path, int *j)
 {
-	if (path[*i] == ':')
+	if (path[*j] == ':')
 		return (1);
-
-	while (path[*i] != ':' && path[*i])
+	while (path[*j] != ':' && path[*j])
 	{
-		*i += 1;
+		*j += 1;
 	}
-
-	if (path[*i])
-		*i += 1;
-
+	if (path[*j])
+		*j += 1;
 	return (0);
 }
 
@@ -34,7 +31,6 @@ char *_which(char *cmd, char **_environ)
 	char *path, *ptr_path, *token_path, *dir;
 	int len_dir, len_cmd, i;
 	struct stat st;
-
 	path = _getenv("PATH", _environ);
 	if (path)
 	{
@@ -81,37 +77,37 @@ char *_which(char *cmd, char **_environ)
 int is_executable(data_shell *datash)
 {
 	struct stat st;
-	int i;
+	int j;
 	char *input;
 
 	input = datash->args[0];
-	for (i = 0; input[i]; i++)
+	for (j = 0; input[j]; j++)
 	{
-		if (input[i] == '.')
+		if (input[j] == '.')
 		{
-			if (input[i + 1] == '.')
+			if (input[j + 1] == '.')
 				return (0);
-			if (input[i + 1] == '/')
+			if (input[j + 1] == '/')
 				continue;
 			else
 				break;
 		}
-		else if (input[i] == '/' && i != 0)
+		else if (input[j] == '/' && j != 0)
 		{
-			if (input[i + 1] == '.')
+			if (input[j + 1] == '.')
 				continue;
-			i++;
+			j++;
 			break;
 		}
 		else
 			break;
 	}
-	if (i == 0)
+	if (j == 0)
 		return (0);
 
-	if (stat(input + i, &st) == 0)
+	if (stat(input + j, &st) == 0)
 	{
-		return (i);
+		return (j);
 	}
 	get_error(datash, 127);
 	return (-1);
@@ -131,7 +127,6 @@ int check_error_cmd(char *dir, data_shell *datash)
 		get_error(datash, 127);
 		return (1);
 	}
-
 	if (_strcmp(datash->args[0], dir) != 0)
 	{
 		if (access(dir, X_OK) == -1)
