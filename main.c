@@ -9,7 +9,6 @@
 void free_data(data_shell *datash)
 {
 	unsigned int i;
-
 	for (i = 0; datash->_environ[i]; i++)
 	{
 		free(datash->_environ[i]);
@@ -29,7 +28,6 @@ void free_data(data_shell *datash)
 void set_data(data_shell *datash, char **av)
 {
 	unsigned int i;
-
 	datash->av = av;
 	datash->input = NULL;
 	datash->args = NULL;
@@ -38,7 +36,6 @@ void set_data(data_shell *datash, char **av)
 
 	for (i = 0; environ[i]; i++)
 		;
-
 	datash->_environ = malloc(sizeof(char *) * (i + 1));
 
 	for (i = 0; environ[i]; i++)
