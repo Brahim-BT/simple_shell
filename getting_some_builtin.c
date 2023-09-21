@@ -7,7 +7,7 @@
  */
 int (*get_builtin(char *cmd))(data_shell *)
 {
-	builtin_t builtin[] = {
+	builtin_t blt_in[] = {
 		{ "env", _env },
 		{ "exit", exit_shell },
 		{ "setenv", _setenv },
@@ -16,13 +16,13 @@ int (*get_builtin(char *cmd))(data_shell *)
 		{ "help", get_help },
 		{ NULL, NULL }
 	};
-	int i;
+	int m;
 
-	for (i = 0; builtin[i].name; i++)
+	for (m = 0; blt_in[m].name; m++)
 	{
-		if (_strcmp(builtin[i].name, cmd) == 0)
+		if (_strcmp(blt_in[m].name, cmd) == 0)
 			break;
 	}
 
-	return (builtin[i].f);
+	return (blt_in[m].f);
 }
